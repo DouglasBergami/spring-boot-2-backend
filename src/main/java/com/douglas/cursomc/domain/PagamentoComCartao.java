@@ -15,14 +15,10 @@ public class PagamentoComCartao extends Pagamento {
 
 	}
 
-	
-
 	public PagamentoComCartao(Integer id, EstadoPagamento estadoPagamento, Pedido pedido, Integer numeroDeParcelas) {
 		super(id, estadoPagamento, pedido);
 		this.numeroDeParcelas = numeroDeParcelas;
 	}
-
-
 
 	public Integer getNumeroDeParcelas() {
 		return numeroDeParcelas;
