@@ -22,16 +22,16 @@ public class CategoriaResource {
 	private CategoriaService categoriaService;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 
-		Categoria obj = categoriaService.buscar(id);
+		Categoria obj = categoriaService.find(id);
 
 		return ResponseEntity.ok().body(obj);
 
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> insert(@RequestBody Categoria obj) {
+	public ResponseEntity<Void> insert(@RequestBody Categoria obj) {
 
 		obj = categoriaService.insert(obj);
 
@@ -40,6 +40,18 @@ public class CategoriaResource {
 
 		return ResponseEntity.created(uri).build();
 
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id){
+		obj.setId(id);
+		obj = categoriaService.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id){
+		categoriaService.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }
