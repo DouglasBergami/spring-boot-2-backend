@@ -18,11 +18,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public abstract class Pagamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private Integer id;
 	private Integer estadoPagamento;
-	
+
 	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
@@ -36,7 +36,7 @@ public abstract class Pagamento implements Serializable {
 	public Pagamento(Integer id, EstadoPagamento estadoPagamento, Pedido pedido) {
 		super();
 		this.id = id;
-		this.estadoPagamento = estadoPagamento.getCod();
+		this.estadoPagamento = (estadoPagamento == null) ? null : estadoPagamento.getCod();
 		this.pedido = pedido;
 	}
 
