@@ -13,11 +13,11 @@ import com.douglas.cursomc.services.exception.ObjectNotFoundException;
 public class PedidoService {
 
 	@Autowired
-	private PedidoRepository PedidoRepository;
+	private PedidoRepository pedidoRepository;
 
 	public Pedido find(Integer id) {
 
-		Optional<Pedido> obj = PedidoRepository.findById(id);
+		Optional<Pedido> obj = pedidoRepository.findById(id);
 
 		return obj.orElseThrow(
 				() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class));
