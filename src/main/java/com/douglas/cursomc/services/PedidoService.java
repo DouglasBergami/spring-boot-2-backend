@@ -42,7 +42,7 @@ public class PedidoService {
 				() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class));
 
 	}
-	
+
 	@Transactional
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
@@ -56,15 +56,15 @@ public class PedidoService {
 		}
 		obj = pedidoRepository.save(obj);
 		pagamentoRepository.save(obj.getPagamento());
-		
-		for(ItemPedido ip: obj.getItens()) {
-			
+
+		for (ItemPedido ip : obj.getItens()) {
+
 			ip.setDesconto(0.0);
 			ip.setProduto(produtoService.find(ip.getProduto().getId()));
 			ip.setPedido(obj);
 			ip.setPreco(ip.getProduto().getPreco());
 		}
-		
+
 		itemPedidoRepository.saveAll(obj.getItens());
 		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
