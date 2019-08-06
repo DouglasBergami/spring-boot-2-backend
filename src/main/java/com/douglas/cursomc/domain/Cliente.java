@@ -39,7 +39,7 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 
-	@ElementCollection(fetch = FetchType.EAGER)
+	@ElementCollection
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 		
@@ -50,8 +50,8 @@ public class Cliente implements Serializable {
 	@JsonIgnore
 	private String senha;
 	
-	@ElementCollection
-	@CollectionTable(name = "PERFIL")
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name = "PERFIS")
 	private Set<Integer> perfis = new HashSet<>();
 
 	public Cliente() {
