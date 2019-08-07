@@ -1,4 +1,4 @@
-package com.douglas.cursomc.resources;
+package com.douglas.cursomc.resources.exception;
 
 import java.util.ArrayList;
 import java.util.List;
