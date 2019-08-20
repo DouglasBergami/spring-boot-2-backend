@@ -53,8 +53,6 @@ public class Cliente implements Serializable {
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name = "PERFIS")
 	private Set<Integer> perfis = new HashSet<>();
-	
-	private String imageURL;
 
 	public Cliente() {
 		super();
@@ -148,7 +146,7 @@ public class Cliente implements Serializable {
 	public Set<Perfil> getPerfis(){
 		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
-	
+
 	public void addPerfil(Perfil perfil) {
 		perfis.add(perfil.getCod());
 	}
@@ -177,13 +175,4 @@ public class Cliente implements Serializable {
 			return false;
 		return true;
 	}
-
-	public String getImageURL() {
-		return imageURL;
-	}
-
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
-	}
-
 }
