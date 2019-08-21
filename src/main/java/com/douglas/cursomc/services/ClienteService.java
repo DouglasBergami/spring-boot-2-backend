@@ -1,7 +1,6 @@
 package com.douglas.cursomc.services;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.ImagingOpException;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -48,6 +47,9 @@ public class ClienteService {
 	@Value("${img.prefix.client.profile}")
 	private String prefix;
 
+	@Value("${img.profile.size}")
+	private Integer size;
+	
 	public Cliente find(Integer id) {
 
 		UserSS user = UserService.authenticated();
@@ -129,10 +131,13 @@ public class ClienteService {
 			throw new AuthorizationException("Acesso negado");
 		}
 
-		BufferedImage jpaImage = imageService.getJpgImageFromFile(multipartFile);
+		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
+		jpgImage = imageService.cropSquare(jpgImage);
+		jpgImage = imageService.resize(jpgImage, size);
+		
 		String fileName = prefix + user.getId() + ".jpg";
 
-		return s3Service.uploadFile(imageService.getInputStream(jpaImage, "jpg"), fileName, "image");
+		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
 	}
 
 }
