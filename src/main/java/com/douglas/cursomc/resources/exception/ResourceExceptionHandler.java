@@ -2,6 +2,7 @@ package com.douglas.cursomc.resources.exception;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.UnsatisfiedDependencyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
